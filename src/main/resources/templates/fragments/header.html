@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head><!--/head-->
+
+<body>
+<div th:fragment="header_info (vm)">
+    <div class="header_top"><!--header_top-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="contactinfo">
+                        <ul class="nav nav-pills">
+                            <li><a href="#"><i class="fa fa-phone"></i> +84 348 4218 80</a></li>
+                            <li><a href="#"><i class="fa fa-envelope"></i>lk.contact@gmail.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="social-icons pull-right">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header_top-->
+
+    <div class="header-middle"><!--header-middle-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="logo pull-left">
+<!--                        <a href="/"><img th:src="${vm.getUrlLogoCompany()}"/></a>-->
+                        <a href="/"><img th:src="@{/images/home/logo.png}" height="39" width="139"/></a>
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="shop-menu pull-right">
+                        <ul class="nav navbar-nav" style="margin-right: 0px">
+                            <th:block  th:each="item : ${vm.getHeaderMenuVMList()}">
+                                <li style="margin-top: 13px">
+                                    <span><a th:href="${item.getLink()}" th:text="${item.getName()}" style="display: inline"></a></span>
+                                    <span><i th:class="${item.getFaName()}"></i></span>
+                                <li>
+                            </th:block>
+                            <li class="dropdown" sec:authorize="isAuthenticated()" style="margin-top: 6px ; margin-right: -85px">
+                                <button th:inline="text" style="margin-right: 10px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    [[${#httpServletRequest.remoteUser}]]
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="" th:href="@{/user/detail}">User Detail</a></li>
+                                    <li><a class="" th:href="@{/order/history}">Order history</a></li>
+                                    <li><a class="" th:href="@{/logout}">Logout</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown" sec:authorize="isAnonymous()" style="margin-top: 6px ; margin-right: -85px">
+                                <button th:inline="text" style="margin-right: 10px" class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Login
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="" th:href="@{/login}">Login</a></li>
+                                    <li><a class="" th:href="@{/order/history}">Order history</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-bottom"><!--header-bottom-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="mainmenu pull-left">
+                        <ul class="nav navbar-nav collapse navbar-collapse">
+                            <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="blog.html">Blog List</a></li>
+                                    <li><a href="blog-single.html">Blog Single</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact-us.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="search_box pull-right">
+                        <form class="form-inline my-2 my-lg-0" th:action="@{/}" th:object="${productname}" method="get">
+                            <input  th:field="*{name}" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--/header-bottom-->
+</div>
+</div>
+</body>
+</html>

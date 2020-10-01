@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order-History | E-Shopper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prettyPhoto.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/price-range.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Order-History</li>
+            </ol>
+        </div>
+        <div class="table-responsive" >
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th colspan="1">Index</th>
+                    <th colspan="2">Customer Name</th>
+                    <th colspan="2">Email</th>
+                    <th colspan="2">Address</th>
+                    <th colspan="2">Phone number</th>
+                    <th colspan="1">Total price</th>
+                    <th colspan="1">Created Date</th>
+                    <th colspan="1">Status</th>
+                    <th colspan="1">Detail</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order,iter : ${vm.getOrderVMS()}" th:switch="${order.getStatus()}">
+                    <td colspan="1" th:text="${iter.index+1}" ></td>
+                    <td colspan="2" th:text="${order.getCustomerName()}"></td>
+                    <td colspan="2" th:text="${order.getEmail()}"></td>
+                    <td colspan="2" th:text="${order.getAddress()}"></td>
+                    <td colspan="2" th:text="${order.getPhoneNumber()}"></td>
+                    <td colspan="1" th:text="${order.getPrice()}"></td>
+                    <td colspan="1" th:text="${order.getCreatedDate()}"></td>
+                    <td colspan="1" th:case="0">Đang xử lý</td>
+                    <td colspan="1" th:case="1">Đang giao hàng</td>
+                    <td colspan="1" th:case="2">Đã nhận hàng</td>
+                    <td colspan="1" th:case="3">Đã hủy</td>
+                    <td colspan="1">
+                        <a class="btn btn-primary" th:href="@{'/order/history/'+${order.getId()}}" role="button">Detail</a>
+                    </td>
+
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</section> <!--/#cart_items-->
+
+
+
+<div th:replace="fragments/footer :: footer_info"></div>
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/slider.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+</body>
+</html>

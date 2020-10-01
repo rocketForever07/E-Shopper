@@ -1,0 +1,213 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin-Order</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- endinject -->
+</head>
+
+<body>
+
+<div class="container-scroller">
+
+    <div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/product}">
+                        <i class="ti-tablet menu-icon"></i>
+                        <span class="menu-title">Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/category}">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/admin/Order}">
+                        <i class="ti-layout-list-post menu-icon"></i>
+                        <span class="menu-title">Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/chart}">
+                        <i class="ti-pie-chart menu-icon"></i>
+                        <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/blog}">
+                        <i class="ti-view-list-alt menu-icon"></i>
+                        <span class="menu-title">Blog</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-panel" id="b">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Order Management</h1>
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/admin/order}" th:object="${phonenumber}" method="get">
+                        <input class="form-control mr-sm-2" th:field="*{phoneNumber}" type="search" placeholder="Phone Number" aria-label="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </div>
+<!--                <h2 th:if="${vm.getKeyword()}" th:text="${vm.getKeyword()}"></h2>-->
+
+                <button type="button" class="btn btn-behance" onclick="printJS('a', 'html')" style="margin-bottom: 20px">
+                    Print
+                </button>
+                <div class="col-lg-12 grid-margin stretch-card" id="a">
+                    <div class="card">
+                        <div class="card-body" style="overflow-x: scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th colspan="1">
+                                        Index
+                                    </th>
+                                    <th colspan="2">
+                                        Customer Name
+                                    </th>
+                                    <th colspan="2">
+                                        Phone Number
+                                    </th>
+                                    <th colspan="2">
+                                        Address
+                                    </th>
+                                    <th colspan="1">
+                                        Price
+                                    </th>
+                                    <th colspan="2">
+                                        Created Date
+                                    </th>
+                                    <th colspan="2">
+                                        Order Status
+                                    </th>
+                                    <th colspan="2">
+                                        Set Status
+                                    </th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="orderVM : ${vm.getOrderVMS()}" th:switch="${orderVM.getStatus()}">
+                                    <td colspan="1" th:text="${orderVM.getId()}"></td>
+                                    <td colspan="2" th:text="${orderVM.getCustomerName()}"></td>
+                                    <td colspan="2" th:text="${orderVM.getPhoneNumber()}"></td>
+                                    <td colspan="2" th:text="${orderVM.getAddress()}"></td>
+                                    <td colspan="1" th:text="${orderVM.getPrice() + ' $'}"></td>
+                                    <td colspan="2" th:text="${orderVM.getCreatedDate()}"></td>
+                                    <td colspan="2" th:case="0">Đang xử lý</td>
+                                    <td colspan="2" th:case="1">Đang giao hàng</td>
+                                    <td colspan="2" th:case="2">Đã nhận hàng</td>
+                                    <td colspan="2" th:case="3">Đã hủy</td>
+
+                                    <td colspan="2" >
+<!--                                        <button type="button" class="btn btn-primary edit-order" id="change-order" data-toggle="modal" style="margin-bottom: 20px" >-->
+                                        <button type="button" class="btn btn-primary edit-order"
+                                                th:onclick="'loadData(\'' + ${orderVM.getId()} + '\');'"
+                                                id="change-order"
+                                                data-toggle="modal" style="margin-bottom: 20px"
+                                                data-target="#exampleModalLong"
+                                                >
+                                        Change
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <nav style="margin-top: 50px" aria-label="..." th:if="${vm.getOrderVMS().size()>0}"  style="margin: auto">
+                    <ul class="pagination">
+                        <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                            <li class="page-item active" th:if="${page.number == i}" aria-current="page">
+                                <a class="page-link" th:href="${''}" th:text="${i+1}"><span class="sr-only"></span></a>
+                            </li>
+                            <li class="page-item"  th:unless="${page.number == i}"><a class="page-link" th:text="${i+1}"
+                                                                                      th:href="${'?'
+                                                                                       +('&page='+i)
+                                                                                       +(#httpServletRequest.getParameter('productName')==null?'':('&productName='+#httpServletRequest.getParameter('productName')))}"></a></li>
+                        </th:block>
+                    </ul>
+                </nav>
+
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add new/ update product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Status:</label>
+                                <select class="form-control" id="input-order-status">
+                                    <option value="0">Order_Processing</option>
+                                    <option value="1">Order_In_Transit</option>
+                                    <option value="2">Order_Delivered</option>
+                                    <option value="3">Order_Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary btn-save-product" onclick="update()">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="footer" th:replace="fragments/footer_admin :: footer_admin_info"></footer>
+
+        </div>
+        <!-- main-panel ends -->
+    </div>  
+    <!-- page-body-wrapper ends -->
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+<script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/js/admin-js/off-canvas.js}"></script>
+<script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/admin-js/template.js}"></script>
+<script th:src="@{/js/admin-js/todolist.js}"></script>
+<script th:src="@{/js/admin-js/order.js}"></script>
+
+<!-- Custom js for this page-->
+<script th:src="@{/js/admin-js/dashboard.js}"></script>
+<!--<script th:src="@{/js/admin-js/order.js}"></script>-->
+
+</body>
+</html>

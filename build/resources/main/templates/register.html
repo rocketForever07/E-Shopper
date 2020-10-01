@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prettyPhoto.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/price-range.css}"/>-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/register.css}"/>
+
+
+</head>
+<!--<body>-->
+<!--<section id="form">&lt;!&ndash;form&ndash;&gt;-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-sm-3"></div>-->
+<!--            <div class="col-sm-4">-->
+<!--                <div class="signup-form">-->
+<!--                    <h2>New User Signup!</h2>-->
+<!--                    <form th:action="@{/register-user}" th:object="${user}" method="post">-->
+<!--                        <fieldset>-->
+<!--                            <div th:if="${param.fail}">-->
+<!--                                <div class="alert alert-danger">-->
+<!--                                    User name or email is existed-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <input type="text" placeholder="User Name" th:field="*{userName}" name="username" class="form-control" required="true"/>-->
+<!--                            <input   type="text" placeholder="Email Address" th:field="*{email}" name="email" class="form-control" required="true"/>-->
+<!--                            <input type="password" placeholder="Password" th:field="*{password}" name="password" class="form-control" required="true"/>-->
+<!--                            <button type="submit" class="btn btn-default" class="form-control">Signup</button>-->
+<!--                        </fieldset>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-sm-1">-->
+<!--                <h2 class="or">OR</h2>-->
+<!--            </div>-->
+<!--            <div class="col-sm-3">-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                <a class="btn btn-default" th:href="@{/login}" role="button">Login</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>&lt;!&ndash;/form&ndash;&gt;-->
+
+<!--<div th:replace="fragments/footer :: footer_info"></div>-->
+
+<!--</body>-->
+
+<body>
+
+<div class="main">
+
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <form method="POST" id="signup-form" class="signup-form" th:action="@{/register-user}" th:object="${user}">
+                    <h2 class="form-title">Create account</h2>
+
+                    <div th:if="${param.fail}">
+                        <div class="alert alert-danger">
+                            User name or email is existed
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" th:field="*{userName}" name="username" id="name" placeholder="User Name" required="true"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" th:field="*{email}" name="email" id="email" placeholder="Email Address" required="true"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" th:field="*{password}" name="password" id="password" placeholder="Password" required="true"/>
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>-->
+<!--                    </div>-->
+
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                    </div>
+                </form>
+                <p class="">
+                    Have already an account ? <a th:href="@{/login}" class="loginhere-link" th:h>Login here</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- JS -->
+<script th:src="@{/js/jquery.js}"></script>
+<!--<script src="js/main.js"></script>-->
+</body><
+
+</html>
+

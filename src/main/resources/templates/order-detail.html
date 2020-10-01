@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Order Detail | E-Shopper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prettyPhoto.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <!--    &lt;!&ndash;[if lt IE 9]>-->
+    <!--    <script src="js/html5shiv.js"></script>-->
+    <!--    <script src="js/respond.min.js"></script>-->
+    <!--    <![endif]&ndash;&gt;-->
+    <link rel="shortcut icon" th:href="@{images/ico/favicon.ico}">
+</head><!--/head-->
+
+<body>
+<div th:replace="fragments/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="">Home</a></li>
+                <li><a th:href="@{/order/history}">Order-History</a></li>
+                <li class="active">Order Detail</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image" >Item</td>
+                    <td class="description" >Name</td>
+                    <td class="price" >Price</td>
+                    <td class="quantity" >Quantity</td>
+                    <td class="total" >Total</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
+                    <td class="cart_product">
+                        <a  style="margin: auto" th:href="${'/product/'+orderProduct.getProductId()}"><img style="width: auto; max-height: 200px;" th:src="${orderProduct.getMainImage()}" alt="image"></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="" th:text="${orderProduct.getName()}"></a></h4>
+                    </td>
+                    <td class="cart_price">
+                        <p th:text="'$' + ${orderProduct.getProductPrice()}"></p>
+                    </td>
+                    <td class="cart_quantity">
+                        <p th:text="${orderProduct.getAmount()}"></p>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section> <!--/#cart_items-->
+
+<section id="do_action">
+    <div class="container">
+        <div class="heading">
+            <h3>Information</h3>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="total_area">
+                    <ul>
+                        <li>Customer name<span th:text="${vm.getCustomerName()}"></span></li>
+                        <li>Order date <span th:text="${vm.getCreatedDate()}"></span></li>
+                        <li th:switch="${vm.getOrderStatus()}">Order status
+                            <span th:case="0">Đang xử</span>
+                            <span th:case="1">Đang giao hàng</span>
+                            <span th:case="2">Đã nhận hàng</span>
+                            <span th:case="3">Đã hủy</span>
+                        </li>
+                    </ul>
+                    <a class="btn btn-default update" href="" th:attr="data-orderId = ${vm.getOrderId()}">Order Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div th:replace="fragments/footer :: footer_info"></div>
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/slider.js}"></script>
+<script th:src="@{/js/cart.js}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | E-Shopper</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/prettyPhoto.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/price-range.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+    <!--    &lt;!&ndash;[if lt IE 9]>-->
+<!--    <script src="js/html5shiv.js"></script>-->
+<!--    <script src="js/respond.min.js"></script>-->
+<!--    <![endif]&ndash;&gt;-->
+    <link rel="shortcut icon" th:href="@{images/ico/favicon.ico}">
+</head><!--/head-->
+
+<body style="background-color: snow;">
+<div th:replace="fragments/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
+
+<section id="cart_items">
+    <div class="container">
+        <div class="breadcrumbs">
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Shopping Cart</li>
+            </ol>
+        </div>
+        <div class="table-responsive cart_info">
+            <table class="table table-condensed">
+                <thead>
+                <tr class="cart_menu">
+                    <td class="image" >Item</td>
+                    <td class="description" >Name</td>
+                    <td class="price" >Price</td>
+                    <td class="quantity" >Quantity</td>
+                    <td class="total" >Total</td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cartProduct,iter : ${vm.getCartItemVMS()}">
+                    <td class="cart_product">
+                        <a  style="margin: auto" href=""><img style="width: auto; max-height: 200px;" th:src="${cartProduct.getMainImage()}" alt=""></a>
+                    </td>
+                    <td class="cart_description">
+                        <h4><a href="" th:text="${cartProduct.getProductName()}"></a></h4>
+                        <p th:text="'Desc: '+${cartProduct.getDesc()}"></p>
+                    </td>
+                    <td class="cart_price">
+                        <p th:text="'$' + ${cartProduct.getProductPrice()}"></p>
+                    </td>
+                    <td class="cart_quantity">
+                        <div class="cart_quantity_button">
+                            <input class="cart_quantity_input" type="number" name="quantity" th:value="${cartProduct.getAmount()}" th:attr="data-id=${cartProduct.getId()}" autocomplete="off" size="2">
+                        </div>
+                    </td>
+                    <td class="cart_total">
+                        <p class="cart_total_price" th:text="'$' + ${cartProduct.getPrice()}"></p>
+                    </td>
+                    <td class="cart_delete">
+                        <a style="cursor: pointer" class="cart_quantity_delete"  th:attr="data-id=${cartProduct.getId()}"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section> <!--/#cart_items-->
+
+<section id="do_action">
+    <div class="container">
+        <div class="heading">
+            <h3>What would you like to do next?</h3>
+            <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+        </div>
+        <div class="row">
+<!--            <div class="col-sm-6">-->
+<!--                <div class="chose_area">-->
+<!--                    <ul class="user_option">-->
+<!--                        <li>-->
+<!--                            <input type="checkbox">-->
+<!--                            <label>Use Coupon Code</label>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <input type="checkbox">-->
+<!--                            <label>Use Gift Voucher</label>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <input type="checkbox">-->
+<!--                            <label>Estimate Shipping & Taxes</label>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <ul class="user_info">-->
+<!--                        <li class="single_field">-->
+<!--                            <label>Country:</label>-->
+<!--                            <select>-->
+<!--                                <option>United States</option>-->
+<!--                                <option>Bangladesh</option>-->
+<!--                                <option>UK</option>-->
+<!--                                <option>India</option>-->
+<!--                                <option>Pakistan</option>-->
+<!--                                <option>Ucrane</option>-->
+<!--                                <option>Canada</option>-->
+<!--                                <option>Dubai</option>-->
+<!--                            </select>-->
+
+<!--                        </li>-->
+<!--                        <li class="single_field">-->
+<!--                            <label>Region / State:</label>-->
+<!--                            <select>-->
+<!--                                <option>Select</option>-->
+<!--                                <option>Dhaka</option>-->
+<!--                                <option>London</option>-->
+<!--                                <option>Dillih</option>-->
+<!--                                <option>Lahore</option>-->
+<!--                                <option>Alaska</option>-->
+<!--                                <option>Canada</option>-->
+<!--                                <option>Dubai </option>-->
+<!--                            </select>-->
+
+<!--                        </li>-->
+<!--                        <li class="single_field zip-field">-->
+<!--                            <label>Zip Code:</label>-->
+<!--                            <input type="text">-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                    <a class="btn btn-default update" href="">Get Quotes</a>-->
+<!--                    <a class="btn btn-default check_out" href="">Continue</a>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="col-sm-6">
+                <div class="total_area">
+                    <ul>
+                        <li>Product Amount <span th:text="${vm.getProductAmount()}"></span></li>
+                        <li>Total Price <span th:text="'$'+ ${vm.getTotalPrice()}"></span></li>
+                        <li>Eco Tax <span>$2</span></li>
+                        <li>Shipping Cost <span>Free</span></li>
+                    </ul>
+<!--                    <a class="btn btn-default update" href="">Update</a>-->
+                    <a class="btn btn-default check_out" th:href="@{'../order/checkout'}">Check Out</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="fragments/footer :: footer_info"></div>
+
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/js/jquery.prettyPhoto.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/slider.js}"></script>
+<script th:src="@{/js/cart.js}"></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+
+
+</body>
+</html>

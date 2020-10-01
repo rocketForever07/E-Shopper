@@ -1,0 +1,192 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin-Order</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        li{
+            text-decoration: none;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container-scroller">
+
+    <div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/product}">
+                        <i class="ti-tablet menu-icon"></i>
+                        <span class="menu-title">Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/category}">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/admin/Order}">
+                        <i class="ti-layout-list-post menu-icon"></i>
+                        <span class="menu-title">Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/chart}">
+                        <i class="ti-pie-chart menu-icon"></i>
+                        <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/blog}">
+                        <i class="ti-view-list-alt menu-icon"></i>
+                        <span class="menu-title">Blog</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-panel" id="b">
+            <div class="content-wrapper" >
+                <div class="page-header">
+                </div>
+                <button type="button" class="btn btn-behance" id="printOrder" style="margin-bottom: 20px">
+                    Print
+                </button>
+                <div id="print-frame">
+                    <div class="col-lg-12 grid-margin stretch-card" id="a">
+                        <div class="card">
+                            <div class="card-body" id="tab" style="overflow-x: scroll">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image" >Item</td>
+                                        <td class="description" >Name</td>
+                                        <td class="price" >Price</td>
+                                        <td class="quantity" >Quantity</td>
+                                        <td class="total" >Total</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
+                                        <td class="">
+                                            <a  style="margin: auto" th:href="${'/product/'+orderProduct.getProductId()}"><img style="width: auto; max-height: 200px;" th:src="${orderProduct.getMainImage()}" alt="image"></a>
+                                        </td>
+                                        <td class="">
+                                            <h4 th:text="${orderProduct.getName()}"></h4>
+                                        </td>
+                                        <td class="">
+                                            <p th:text="'$' + ${orderProduct.getProductPrice()}"></p>
+                                        </td>
+                                        <td class="">
+                                            <p th:text="${orderProduct.getAmount()}"></p>
+                                        </td>
+                                        <td class="">
+                                            <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}"></p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <section id="do_action">
+                        <div class="container">
+                            <div class="heading">
+                                <h3>Information</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="total_area">
+                                        <ul style="margin-left: -15px">
+                                            <li>Customer name :<span th:text="' '+${vm.getCustomerName()}"></span></li>
+                                            <li>Order date :<span th:text="${' '+vm.getCreatedDate()}"></span></li>
+                                            <li th:switch="${vm.getOrderStatus()}">Order status
+                                                <span th:case="0">Đang xử</span>
+                                                <span th:case="1">Đang giao hàng</span>
+                                                <span th:case="2">Đã nhận hàng</span>
+                                                <span th:case="3">Đã hủy</span>
+                                            </li>
+                                            <li>Total price :<span th:text="' '+${vm.getTotalPrice()}+'$'"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <footer class="footer" th:replace="fragments/footer_admin :: footer_admin_info"></footer>
+
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js"></script>
+<script th:src="@{/js/printThis.js}"></script>
+
+<script>
+
+
+
+
+
+    let option={
+
+
+        importCss: false,
+        pageTitle: "shop receipt",
+        header: "<h2 style='text-align: center'>E shopper</h2>" +
+                "<h3 style='text-align: center'>Shop receipt</h3>"+
+            "<img style='margin: auto' src='https://eshopper.info/wp-content/uploads/2020/04/logo-eshopper.png' height='70' width='300'/>",
+        footer:"",
+    }
+
+    $('#printOrder').on('click',function () {
+        $('#print-frame').printThis(option);
+    });
+</script>
+
+<script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+
+<!-- inject:js -->
+<script th:src="@{/js/printThis.js}"></script>
+<script th:src="@{/js/admin-js/off-canvas.js}"></script>
+<script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/admin-js/template.js}"></script>
+<script th:src="@{/js/admin-js/todolist.js}"></script>
+
+<!-- Custom js for this page-->
+<script th:src="@{/js/admin-js/dashboard.js}"></script>
+<!--<script th:src="@{/js/admin-js/order.js}"></script>-->
+
+</body>
+</html>

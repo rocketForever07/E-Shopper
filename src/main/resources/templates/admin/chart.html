@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RoyalUI Admin</title>
+    <!-- plugins:css -->
+<!--    <link rel="stylesheet" th:href="/vendors/ti-icons/css/themify-icons.css">-->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- endinject -->
+    <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+</head>
+
+<body>
+<div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
+
+<div class="container-scroller">
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/product}">
+                        <i class="ti-tablet menu-icon"></i>
+                        <span class="menu-title">Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/category}">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/order}">
+                        <i class="ti-layout-list-post menu-icon"></i>
+                        <span class="menu-title">Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/chart}">
+                        <i class="ti-pie-chart menu-icon"></i>
+                        <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/blog}">
+                        <i class="ti-view-list-alt menu-icon"></i>
+                        <span class="menu-title">Blog</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Bad Product In Stock</h4>
+                                <canvas id="barChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">List Product Ordered By Category</h4>
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+<!--                    <div class="col-lg-6 grid-margin stretch-card">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-body">-->
+<!--                                <h4 class="card-title">Area chart</h4>-->
+<!--                                <canvas id="areaChart"></canvas>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Revenue Month By Year</h4>
+                                <canvas id="barChart2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Hot Products In Month</h4>
+                                <canvas id="doughnutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Revenue Month By Year</h4>
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <div class="col-lg-6 grid-margin grid-margin-lg-0 stretch-card">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-body">-->
+<!--                                <h4 class="card-title">Scatter chart</h4>-->
+<!--                                <canvas id="scatterChart"></canvas>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                    <div class="col-lg-6 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Line chart</h4>
+                                <canvas id="lineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2018 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrapdash</a>. All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+                </div>
+            </footer>
+            <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+
+<!-- End plugin js for this page-->
+<script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+<!-- inject:js -->
+<script th:src="@{/js/admin-js/off-canvas.js}"></script>
+<script th:src="@{/js/admin-js/chart.js}"></script>
+<script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/admin-js/template.js}"></script>
+<script th:src="@{/js/admin-js/todolist.js}"></script>
+<!-- Custom js for this page-->
+<script th:src="@{/js/admin-js/dashboard.js}"></script>
+<script th:src="@{/js/admin-js/dashboarded.js}"></script>
+<script th:src="@{/vendors/chart.js/Chart.min.js}"></script>
+
+<!-- End custom js for this page-->
+</body>
+
+</html>

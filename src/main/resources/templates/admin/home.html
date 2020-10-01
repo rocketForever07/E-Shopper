@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RoyalUI Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- endinject -->
+</head>
+<body>
+<div class="container-scroller">
+<div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/product}">
+                        <i class="ti-tablet menu-icon"></i>
+                        <span class="menu-title">Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" th:href="@{/admin/category}" aria-expanded="false" aria-controls="ui-basic">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/order}">
+                        <i class="ti-layout-list-post menu-icon"></i>
+                        <span class="menu-title">Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/chart}">
+                        <i class="ti-pie-chart menu-icon"></i>
+                        <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/blog}">
+                        <i class="ti-view-list-alt menu-icon"></i>
+                        <span class="menu-title">Blog</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../pages/icons/themify.html">
+                        <i class="ti-star menu-icon"></i>
+                        <span class="menu-title">Icons</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="ti-user menu-icon"></i>
+                        <span class="menu-title">User Pages</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="auth">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login-2.html"> Login 2 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register-2.html"> Register 2 </a></li>
+                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/lock-screen.html"> Lockscreen </a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../documentation/documentation.html">
+                        <i class="ti-write menu-icon"></i>
+                        <span class="menu-title">Documentation</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-panel">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1 class="page-title">
+                        Welcome to admin !!!
+                    </h1>
+                </div>
+            </div>
+
+            <footer class="footer" th:replace="fragments/footer_admin :: footer_admin_info"></footer>
+
+        </div>
+        <!-- main-panel ends -->
+    </div>
+</div>
+
+<script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/js/admin-js/off-canvas.js}"></script>
+<script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/admin-js/template.js}"></script>
+<script th:src="@{/js/admin-js/todolist.js}"></script>
+<!-- Custom js for this page-->
+<script th:src="@{/js/admin-js/dashboard.js}"></script>
+<script th:src="@{/js/admin-js/dashboarded.js}"></script>
+<!-- End custom js for this page-->
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+
+<!--    <meta charset="utf-8"/>-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1"/>-->
+
+<!--    <title>Home page</title>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/prettyPhoto.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/price-range.css}"/>-->
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/register.css}">-->
+<!--</head>-->
+<!--<body>-->
+<!--<section id="form">&lt;!&ndash;form&ndash;&gt;-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-sm-2"></div>-->
+<!--            <div class="col-sm-4 col-sm-offset-1">-->
+<!--                <div class="login-form">&lt;!&ndash;login form&ndash;&gt;-->
+<!--                    <h2>Login to your account</h2>-->
+<!--                    <form th:action="@{/login}" method="post">-->
+<!--                        <fieldset>-->
+<!--                            <div th:if="${param.fail}">-->
+<!--                                <div class="alert alert-danger">-->
+<!--                                    Invalid username and password-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div th:if="${param.logout}">-->
+<!--                                <div class="alert alert-info">-->
+<!--                                    You have been logged out.-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <input type="text" name ="username"-->
+<!--                                   placeholder="UserName" required="true" autofocus="true"/>-->
+<!--                            <input type="password" name="password" id="password" class="form-control input-lg"-->
+<!--                                   placeholder="Password" required="true"/>-->
+<!--                            <span>-->
+<!--                                <input type="checkbox" class="checkbox" name="remember-me">-->
+<!--                                Keep me signed in-->
+<!--                            </span>-->
+<!--                            <button type="submit" class="btn btn-default">Login</button>-->
+<!--                        </fieldset>-->
+<!--                    </form>-->
+
+<!--                </div>&lt;!&ndash;/login form&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="col-sm-1">-->
+<!--                <h2 class="or">OR</h2>-->
+<!--            </div>-->
+<!--            <div class="col-sm-3">-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                <br>-->
+<!--                <a class="btn btn-default" href="/register" role="button">Register</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<div class="main">-->
+
+<!--    <section class="signup">-->
+<!--        <div class="container">-->
+<!--            <div class="signup-content">-->
+<!--                <form method="POST" id="signup-form" class="signup-form">-->
+<!--                    <h2 class="form-title">Create account</h2>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>-->
+<!--                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />-->
+<!--                        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--                <p class="loginhere">-->
+<!--                    Have already an account ? <a href="#" class="loginhere-link">Login here</a>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash;<div th:replace="fragments/footer :: footer_info"></div>&ndash;&gt;-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+
+    <!-- Main css -->
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+<body>
+
+<div class="main">
+
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <form th:action="@{/login}" method="post" id="signup-form" class="signup-form">
+                    <h2 class="form-title">Login</h2>
+                    <div th:if="${param.fail}">
+                        <div class="alert alert-danger">
+                            Invalid username and password
+                        </div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">
+                            You have been logged out.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-input" name="username" id="name" placeholder="UserName"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-input" name="password" id="password" placeholder="Password"/>
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                    </div>
+                </form>
+                <p class="loginhere">
+                    Do not have an account ?  <a th:href="@{/register}" class="loginhere-link">Register Here</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- JS -->
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.scrollUp.min.js}"></script>
+<script th:src="@{/js/jquery.prettyPhoto.js}"></script><script th:src="@{/js/main.js}"></script>
+</body>
+</html>

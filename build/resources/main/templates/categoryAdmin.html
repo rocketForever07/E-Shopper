@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>RoyalUI Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- endinject -->
+</head>
+<body>
+<div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
+
+<!-- plugins:js -->
+<script th:src="@{vendors/base/vendor.bundle.base.js}"></script>
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{js/admin-js/category.js}"></script>
+<script th:src="@{js/admin-js/off-canvas.js}"></script>
+<script th:src="@{js/admin-js/hoverable-collapse.js}"></script>
+<script th:src="@{js/admin-js/template.js}"></script>
+<script th:src="@{js/admin-js/todolist.js}"></script>
+
+<!-- Custom js for this page-->
+<script th:src="@{js/admin-js/dashboard.js}"></script>
+<!-- End custom js for this page-->
+</body>
+</html>
+

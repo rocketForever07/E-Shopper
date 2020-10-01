@@ -1,0 +1,141 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin-Order</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container-scroller">
+
+    <div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
+
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+        <!-- partial:../../partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/product}">
+                        <i class="ti-tablet menu-icon"></i>
+                        <span class="menu-title">Product</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/category}">
+                        <i class="ti-palette menu-icon"></i>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/admin/Order}">
+                        <i class="ti-layout-list-post menu-icon"></i>
+                        <span class="menu-title">Order</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/chart}">
+                        <i class="ti-pie-chart menu-icon"></i>
+                        <span class="menu-title">Charts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/blog}">
+                        <i class="ti-view-list-alt menu-icon"></i>
+                        <span class="menu-title">Blog</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="main-panel" id="b">
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Order Management</h1>
+                    <form class="form-inline my-2 my-lg-0" th:action="@{/admin/order}" th:object="${phonenumber}" method="get">
+                        <input class="form-control mr-sm-2" th:field="*{phoneNumber}" type="search" placeholder="Phone Number" aria-label="Search">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </form>
+                </div>
+                <!--                <h2 th:if="${vm.getKeyword()}" th:text="${vm.getKeyword()}"></h2>-->
+
+                <button type="button" class="btn btn-behance" onclick="printJS('a', 'html')" style="margin-bottom: 20px">
+                    Print
+                </button>
+                <div class="col-lg-12 grid-margin stretch-card" id="a">
+                    <div class="card">
+                        <div class="card-body" style="overflow-x: scroll">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr class="cart_menu">
+                                    <td class="image" >Item</td>
+                                    <td class="description" >Name</td>
+                                    <td class="price" >Price</td>
+                                    <td class="quantity" >Quantity</td>
+                                    <td class="total" >Total</td>
+                                    <td></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
+                                    <td class="cart_product">
+                                        <a  style="margin: auto" th:href="${'/product/'+orderProduct.getProductId()}"><img style="width: auto; max-height: 200px;" th:src="${orderProduct.getMainImage()}" alt="image"></a>
+                                    </td>
+                                    <td class="cart_description">
+                                        <h4><a href="" th:text="${orderProduct.getName()}"></a></h4>
+                                    </td>
+                                    <td class="cart_price">
+                                        <p th:text="'$' + ${orderProduct.getProductPrice()}"></p>
+                                    </td>
+                                    <td class="cart_quantity">
+                                        <p th:text="${orderProduct.getAmount()}"></p>
+                                    </td>
+                                    <td class="cart_total">
+                                        <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}"></p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <footer class="footer" th:replace="fragments/footer_admin :: footer_admin_info"></footer>
+
+        </div>
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+<script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/js/admin-js/off-canvas.js}"></script>
+<script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/admin-js/template.js}"></script>
+<script th:src="@{/js/admin-js/todolist.js}"></script>
+<script th:src="@{/js/admin-js/order-detail.js}"></script>
+
+<!-- Custom js for this page-->
+<script th:src="@{/js/admin-js/dashboard.js}"></script>
+<!--<script th:src="@{/js/admin-js/order.js}"></script>-->
+
+</body>
+</html>

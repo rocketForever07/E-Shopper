@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="db_lk_luxury@localhost" uuid="0d3253ec-ed8f-499b-a10b-c325bb4cbfbe">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/db_lk_luxury</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="db_lk_luxury@localhost [2]" uuid="f4290515-888c-487b-afeb-217a58f39578">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/db_lk_luxury</jdbc-url>
+    </data-source>
+  </component>
+</project>
