@@ -67,4 +67,10 @@ $(document).ready(function () {
         $("cke_dialog").hide();
         CKEDITOR.instances.editor.setData('Hello ...');
     });
+
+    $('#btn_cancel').click(function () {
+        $("cke_dialog").hide();
+        CKEDITOR.instances.editor.setData('Hello ...');
+    });
+
 });
