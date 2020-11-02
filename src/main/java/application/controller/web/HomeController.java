@@ -49,32 +49,21 @@ public class HomeController extends BaseController {
                        final Principal principal) {
 
 
-
         this.checkCookie(response,request,principal);
         HomeLandingVM vm = new HomeLandingVM();
 
         /**
          * set list bannerVM
          */
+
         List<BannerVM> listBanners = new ArrayList<>();
         listBanners.add(new BannerVM("", "Text 1","https://forums.oscommerce.com/uploads/monthly_04_2016/post-336856-0-18918000-1459704022.jpg"));
         listBanners.add(new BannerVM("", "Text 2","https://media.doisongvietnam.vn/u/rootimage/editor/2020/01/23/20/33/w825/e11579764812_3938.jpg"));
-
 
         /**
          * set list categoryVM
          */
         List<CategoryVM> categoryVMList=categoryService.getListCategories();
-//        for(Category category : categoryList) {
-//            CategoryVM categoryVM = new CategoryVM();
-//            categoryVM.setId(category.getId());
-//            categoryVM.setName(category.getName());
-//            categoryVMList.add(categoryVM);
-//        }
-
-        /*
-        * set list product
-        * */
 
         Sort sortable = new Sort(Sort.Direction.ASC,"id");
         if(sort != null) {
