@@ -33,6 +33,7 @@ public class CartController extends BaseController {
     @Autowired
     private CartService cartService;
 
+
     @GetMapping("")
     public String cart(Model model,
                        @Valid @ModelAttribute("productname") ProductVM productName,
@@ -40,9 +41,12 @@ public class CartController extends BaseController {
                        HttpServletRequest request,
                        final Principal principal) {
 
+
         this.checkCookie(response,request,principal);
 
+
         CartVM vm = new CartVM();
+
 
         int itemAmount = 0;
         double totalPrice = 0;
@@ -77,7 +81,6 @@ public class CartController extends BaseController {
                 }
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
         }
 
         vm.setProductAmount(itemAmount);

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/responsive.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
 
-</head><!--/head-->
+</head>
 
 <body>
 <div th:replace="fragments/header :: header_info (vm=${vm.getLayoutHeaderVM()})"></div>
@@ -58,7 +58,7 @@
                                 <div class="item active">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-6">
-                                        <img th:src="@{/images/home/girl1.jpg}" class="girl img-responsive" alt="">
+                                        <img th:src="${vm.getProductVM().getMainImage()}" class="girl img-responsive" alt="" style="height:80px">
                                     </div>
                                     <div class="col-sm-3"></div>
                                 </div>
@@ -66,7 +66,7 @@
                                 <div class="item" th:each="productImg : ${vm.getProductVM().getProductImageVMS()  }">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-6">
-                                        <img th:src="${productImg.getLink()}" class="girl img-responsive" alt="">
+                                        <img th:src="${productImg.getLink()}" class="girl img-responsive" alt="" style="margin: auto ; height: 80px">
                                     </div>
                                     <div class="col-sm-3"></div>
                                 </div>
@@ -163,8 +163,6 @@
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/slider.js}"></script>
 <script th:src="@{/js/product-detail.js}"></script>
-<script th:src="@{/js/product-detailed.js}"></script>
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>

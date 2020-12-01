@@ -236,6 +236,7 @@ public class OrderController extends BaseController {
         vm.setOrderProductVMS(orderProductVMS);
         vm.setTotalPrice(df.format(totalPrice));
         vm.setTotalProduct(orderProductVMS.size());
+        vm.setOrderId(orderId);
 
         vm.setCustomerName(orderEntity.getCustomerName());
         vm.setCreatedDate(orderEntity.getCreatedDate());

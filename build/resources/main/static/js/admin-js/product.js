@@ -2,19 +2,20 @@ $(document).ready(function() {
 
     let dataProduct = {};
 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview-product-img').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
-    // function readURL(input) {
-    //     if (input.files && input.files[0]) {
-    //         let reader = new FileReader();
-    //         reader.onload = function(e) {
-    //             $('#preview-product-img').attr('src', e.target.result);
-    //         }
-    //         reader.readAsDataURL(input.files[0]);
-    //     }
-    // }
+
 
     $("#change-product-mainImage").change(function() {
-        // readURL(this);
+        readURL(this);
         let formData = new FormData();
         formData.append('file', $("#change-product-mainImage")[0].files[0]);
 
@@ -48,7 +49,6 @@ $(document).ready(function() {
                     $('.product-main-image').attr('src', res.data.data.mainImage);
                 }
             }else {
-                console.log("shit");
             }
         }, function(err){
             swal(
@@ -81,7 +81,6 @@ $(document).ready(function() {
         }
 
         axios.post(linkPost, dataProduct).then(function(res){
-            alert("gọi api post r")
             if(res.data.success) {
                 swal(
                     'Good job!',

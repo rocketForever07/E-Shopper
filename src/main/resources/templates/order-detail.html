@@ -18,6 +18,12 @@
     <!--    <script src="js/respond.min.js"></script>-->
     <!--    <![endif]&ndash;&gt;-->
     <link rel="shortcut icon" th:href="@{images/ico/favicon.ico}">
+
+    <style>
+        td{
+            text-align: center;
+        }
+    </style>
 </head><!--/head-->
 
 <body>
@@ -36,7 +42,7 @@
             <table class="table table-condensed">
                 <thead>
                 <tr class="cart_menu">
-                    <td class="image" >Item</td>
+                    <td class="image" style="padding-left: 0px">Item</td>
                     <td class="description" >Name</td>
                     <td class="price" >Price</td>
                     <td class="quantity" >Quantity</td>
@@ -46,20 +52,20 @@
                 </thead>
                 <tbody>
                 <tr th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
-                    <td class="cart_product">
+                    <td class="cart_product"  style="width: 87%">
                         <a  style="margin: auto" th:href="${'/product/'+orderProduct.getProductId()}"><img style="width: auto; max-height: 200px;" th:src="${orderProduct.getMainImage()}" alt="image"></a>
                     </td>
-                    <td class="cart_description">
-                        <h4><a href="" th:text="${orderProduct.getName()}"></a></h4>
+                    <td class="cart_description" >
+                        <h4 style="margin: 0px;"><a href="" th:text="${orderProduct.getName()}"></a></h4>
                     </td>
                     <td class="cart_price">
-                        <p th:text="'$' + ${orderProduct.getProductPrice()}"></p>
+                        <p th:text="'$' + ${orderProduct.getProductPrice()}" style="text-align: center; margin-bottom: 0px;"></p>
                     </td>
                     <td class="cart_quantity">
-                        <p th:text="${orderProduct.getAmount()}"></p>
+                        <p th:text="${orderProduct.getAmount()}" style="margin-bottom: 0px"></p>
                     </td>
                     <td class="cart_total">
-                        <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}"></p>
+                        <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}" style="margin-bottom: 0px"></p>
                     </td>
                 </tr>
                 </tbody>
@@ -78,15 +84,17 @@
                 <div class="total_area">
                     <ul>
                         <li>Customer name<span th:text="${vm.getCustomerName()}"></span></li>
-                        <li>Order date <span th:text="${vm.getCreatedDate()}"></span></li>
+                        <li id="test">Order date <span th:text="${vm.getCreatedDate()}"></span></li>
                         <li th:switch="${vm.getOrderStatus()}">Order status
-                            <span th:case="0">Đang xử</span>
-                            <span th:case="1">Đang giao hàng</span>
+                            <span th:case="0">Processing</span>
+                            <span th:case="1">In transit</span>
                             <span th:case="2">Đã nhận hàng</span>
-                            <span th:case="3">Đã hủy</span>
+                            <span th:case="3">Canceled</span>
                         </li>
                     </ul>
-                    <a class="btn btn-default update" href="" th:attr="data-orderId = ${vm.getOrderId()}">Order Cancel</a>
+                    <li th:if="${vm.getOrderStatus() == 0}">
+                        <a class="btn btn-default update" id="cancel" th:attr="data-id = ${vm.getOrderId()}" style="margin-left: 21px;">Order Cancel</a>
+                    </li>
                 </div>
             </div>
         </div>
@@ -96,6 +104,9 @@
 
 <div th:replace="fragments/footer :: footer_info"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
 <script th:src="@{/js/jquery.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/jquery.scrollUp.min.js}"></script>
@@ -103,9 +114,9 @@
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/slider.js}"></script>
 <script th:src="@{/js/cart.js}"></script>
+<script th:src="@{/js/order-detail.js}"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
 
 </body>
 </html>

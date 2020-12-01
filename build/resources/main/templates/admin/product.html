@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/Order}">
+                    <a class="nav-link" th:href="@{/admin/order}">
                         <i class="ti-layout-list-post menu-icon"></i>
                         <span class="menu-title">Order</span>
                     </a>
@@ -52,34 +52,6 @@
                     <a class="nav-link" th:href="@{/admin/blog}">
                         <i class="ti-view-list-alt menu-icon"></i>
                         <span class="menu-title">Blog</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../../pages/icons/themify.html">
-                        <i class="ti-star menu-icon"></i>
-                        <span class="menu-title">Icons</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="ti-user menu-icon"></i>
-                        <span class="menu-title">User Pages</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="collapse" id="auth">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login.html"> Login </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/login-2.html"> Login 2 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register.html"> Register </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/register-2.html"> Register 2 </a></li>
-                            <li class="nav-item"> <a class="nav-link" href="../../pages/samples/lock-screen.html"> Lockscreen </a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="../../documentation/documentation.html">
-                        <i class="ti-write menu-icon"></i>
-                        <span class="menu-title">Documentation</span>
                     </a>
                 </li>
             </ul>
@@ -152,7 +124,7 @@
 
 
                 <nav style="margin-top: 50px" aria-label="..." th:if="${vm.getProductVMList().size()>0}">
-                    <ul class="pagination">
+                    <ul class="pagination" >
                         <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
                             <li class="page-item active" th:if="${page.number == i}" aria-current="page">
                                 <a class="page-link" th:href="${''}" th:text="${i+1}"><span class="sr-only"></span></a>
@@ -233,9 +205,7 @@
 <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
 
 <script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
-<!-- Plugin js for this page-->
-<!-- End plugin js for this page-->
-<!-- inject:js -->
+-->
 <script th:src="@{/js/admin-js/product.js}"></script>
 <script th:src="@{/js/admin-js/off-canvas.js}"></script>
 <script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>

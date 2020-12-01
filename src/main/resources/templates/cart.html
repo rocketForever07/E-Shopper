@@ -20,6 +20,13 @@
 <!--    <script src="js/respond.min.js"></script>-->
 <!--    <![endif]&ndash;&gt;-->
     <link rel="shortcut icon" th:href="@{images/ico/favicon.ico}">
+
+    <style>
+        td{
+            text-align: center;
+            line-height: 100%;
+        }
+    </style>
 </head><!--/head-->
 
 <body style="background-color: snow;">
@@ -42,30 +49,31 @@
                     <td class="price" >Price</td>
                     <td class="quantity" >Quantity</td>
                     <td class="total" >Total</td>
-                    <td></td>
+                    <td>X</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="cartProduct,iter : ${vm.getCartItemVMS()}">
-                    <td class="cart_product">
+                    <td class="cart_product" style="width: 87%">
                         <a  style="margin: auto" href=""><img style="width: auto; max-height: 200px;" th:src="${cartProduct.getMainImage()}" alt=""></a>
                     </td>
                     <td class="cart_description">
                         <h4><a href="" th:text="${cartProduct.getProductName()}"></a></h4>
-                        <p th:text="'Desc: '+${cartProduct.getDesc()}"></p>
+                        <p th:text="'Desc: '+${cartProduct.getDesc()}" style="margin-bottom: 0px"></p>
                     </td>
                     <td class="cart_price">
-                        <p th:text="'$' + ${cartProduct.getProductPrice()}"></p>
+                        <p th:text="'$' + ${cartProduct.getProductPrice()}" style="margin-bottom: 0px"></p>
                     </td>
-                    <td class="cart_quantity">
-                        <div class="cart_quantity_button">
-                            <input class="cart_quantity_input" type="number" name="quantity" th:value="${cartProduct.getAmount()}" th:attr="data-id=${cartProduct.getId()}" autocomplete="off" size="2">
-                        </div>
+                    <td class="cart_quantity" style="box-sizing: border-box ; ">
+<!--                        <div class="cart_quantity_button">-->
+<!--                            <input class="cart_quantity_input" type="number" name="quantity" th:value="${cartProduct.getAmount()}" th:attr="data-id=${cartProduct.getId()}" autocomplete="off" size="2">-->
+<!--                        </div>-->
+                        <input class="cart_quantity_input" type="number" name="quantity" th:value="${cartProduct.getAmount()}" th:attr="data-id=${cartProduct.getId()}" autocomplete="off" size="2" style="width: 100%">
                     </td>
                     <td class="cart_total">
-                        <p class="cart_total_price" th:text="'$' + ${cartProduct.getPrice()}"></p>
+                        <p class="cart_total_price" th:text="'$' + ${cartProduct.getPrice()}" style="margin-bottom: 0px"></p>
                     </td>
-                    <td class="cart_delete">
+                    <td class="cart_delete" width="87%">
                         <a style="cursor: pointer" class="cart_quantity_delete"  th:attr="data-id=${cartProduct.getId()}"><i class="fa fa-times"></i></a>
                     </td>
                 </tr>

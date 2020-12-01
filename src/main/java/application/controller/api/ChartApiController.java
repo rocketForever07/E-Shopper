@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/chart")
-public class ChartApiController {
+public class  ChartApiController {
 
     @Autowired
     private ProductRepository productRepository;

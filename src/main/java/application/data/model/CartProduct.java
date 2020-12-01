@@ -10,6 +10,9 @@ public class CartProduct {
     @Id
     private int id;
 
+
+
+
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
     private Cart cart;

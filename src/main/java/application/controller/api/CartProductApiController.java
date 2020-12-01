@@ -49,6 +49,8 @@ public class CartProductApiController {
                         cartProduct.setProduct(productEntity);
                         cartProductService.addNewCartProduct(cartProduct);
                     }
+
+
                     result.setMessage("Add to cart successfully!");
                     result.setSuccess(true);
                     return result;
@@ -97,7 +99,6 @@ public class CartProductApiController {
                 return result;
             }
         } catch (Exception e) {
-            logger.error(e.getMessage());
         }
         result.setSuccess(false);
         result.setMessage("Fail!");

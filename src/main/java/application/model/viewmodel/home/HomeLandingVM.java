@@ -12,6 +12,25 @@ public class HomeLandingVM {
     private List<BannerVM> listBanners;
     private List<ProductVM> productVMList;
     private List<CategoryVM> categoryVMList;
+    private List<ProductVM> listNewProducts;
+    private List<ProductVM> listPopularProducts;
+
+    public List<ProductVM> getListNewProducts() {
+        return listNewProducts;
+    }
+
+    public void setListNewProducts(List<ProductVM> listNewProducts) {
+        this.listNewProducts = listNewProducts;
+    }
+
+    public List<ProductVM> getListPopularProducts() {
+        return listPopularProducts;
+    }
+
+    public void setListPopularProducts(List<ProductVM> listPopularProducts) {
+        this.listPopularProducts = listPopularProducts;
+    }
+
     private String keyword;
 
     public LayoutHeaderVM getLayoutHeaderVM() {

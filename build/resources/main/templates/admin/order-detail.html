@@ -8,6 +8,13 @@
     <link rel="stylesheet" th:href="@{/vendors/ti-icons/css/themify-icons.css}">
     <link rel="stylesheet" th:href="@{/vendors/base/vendor.bundle.base.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <style>
+        li{
+            text-decoration: none;
+            list-style: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -15,7 +22,6 @@
 <div class="container-scroller">
 
     <div th:replace="fragments/header_admin :: header_admin_info (vm=${vm.getLayoutHeaderAdminVM()})"></div>
-
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_sidebar.html -->
@@ -54,57 +60,79 @@
             </ul>
         </nav>
         <div class="main-panel" id="b">
-            <div class="content-wrapper">
+            <div class="content-wrapper" >
                 <div class="page-header">
-                    <h1>Order Management</h1>
-                    <form class="form-inline my-2 my-lg-0" th:action="@{/admin/order}" th:object="${phonenumber}" method="get">
-                        <input class="form-control mr-sm-2" th:field="*{phoneNumber}" type="search" placeholder="Phone Number" aria-label="Search">
-                        <button class="btn btn-primary" type="submit">Search</button>
-                    </form>
                 </div>
-                <!--                <h2 th:if="${vm.getKeyword()}" th:text="${vm.getKeyword()}"></h2>-->
-
-                <button type="button" class="btn btn-behance" onclick="printJS('a', 'html')" style="margin-bottom: 20px">
+                <button type="button" class="btn btn-behance" id="printOrder" style="margin-bottom: 20px">
                     Print
                 </button>
-                <div class="col-lg-12 grid-margin stretch-card" id="a">
-                    <div class="card">
-                        <div class="card-body" style="overflow-x: scroll">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr class="cart_menu">
-                                    <td class="image" >Item</td>
-                                    <td class="description" >Name</td>
-                                    <td class="price" >Price</td>
-                                    <td class="quantity" >Quantity</td>
-                                    <td class="total" >Total</td>
-                                    <td></td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
-                                    <td class="cart_product">
-                                        <a  style="margin: auto" th:href="${'/product/'+orderProduct.getProductId()}"><img style="width: auto; max-height: 200px;" th:src="${orderProduct.getMainImage()}" alt="image"></a>
-                                    </td>
-                                    <td class="cart_description">
-                                        <h4><a href="" th:text="${orderProduct.getName()}"></a></h4>
-                                    </td>
-                                    <td class="cart_price">
-                                        <p th:text="'$' + ${orderProduct.getProductPrice()}"></p>
-                                    </td>
-                                    <td class="cart_quantity">
-                                        <p th:text="${orderProduct.getAmount()}"></p>
-                                    </td>
-                                    <td class="cart_total">
-                                        <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}"></p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                <div id="print-frame">
+                    <div class="col-lg-12 grid-margin stretch-card" id="a" style="margin-left: -16px">
+                        <div class="card">
+                            <div class="card-body" id="tab" style="overflow-x: scroll">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr class="cart_menu">
+                                        <td class="image" >Item</td>
+                                        <td class="description" >Name</td>
+                                        <td class="price" >Price</td>
+                                        <td class="quantity" >Quantity</td>
+                                        <td class="total" >Total</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="orderProduct,iter : ${vm.getOrderProductVMS()}">
+                                        <td class="">
+                                            <a  style="margin: auto" th:href="${'/product/'+orderProduct.getProductId()}"><img style="width: auto; max-height: 200px;" th:src="${orderProduct.getMainImage()}" alt="image"></a>
+                                        </td>
+                                        <td class="">
+                                            <h4 th:text="${orderProduct.getName()}"></h4>
+                                        </td>
+                                        <td class="">
+                                            <p th:text="'$' + ${orderProduct.getProductPrice()}"></p>
+                                        </td>
+                                        <td class="">
+                                            <p th:text="${orderProduct.getAmount()}"></p>
+                                        </td>
+                                        <td class="">
+                                            <p class="cart_total_price" th:text="'$' + ${orderProduct.getPrice()}"></p>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <section id="do_action" style="background-color: white">
+                        <div class="container">
+                            <div class="heading">
+                                <h3>Information</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="total_area">
+                                        <ul style="margin-left: -15px">
+                                            <li>Customer name :<span th:text="' '+${vm.getCustomerName()}"></span></li>
+                                            <li>Order date :<span th:text="${' '+vm.getCreatedDate()}"></span></li>
+                                            <li th:switch="${vm.getOrderStatus()}">Order status
+                                                <span th:case="0">Đang xử</span>
+                                                <span th:case="1">Đang giao hàng</span>
+                                                <span th:case="2">Đã nhận hàng</span>
+                                                <span th:case="3">Đã hủy</span>
+                                            </li>
+                                            <li>Total price :<span th:text="' '+${vm.getTotalPrice()}+'$'"></span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
 
             <footer class="footer" th:replace="fragments/footer_admin :: footer_admin_info"></footer>
@@ -115,23 +143,47 @@
     <!-- page-body-wrapper ends -->
 </div>
 
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
 <script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js"></script>
+<script th:src="@{/js/printThis.js}"></script>
+
+<script>
+
+
+
+
+
+    let option={
+
+
+        importCss: false,
+        pageTitle: "shop receipt",
+        header:
+                "<h2 style='text-align: center'>E shopper</h2>" +
+                "<h3 style='text-align: center'>Shop receipt</h3>"+
+                "<img style='margin: auto' src='https://eshopper.info/wp-content/uploads/2020/04/logo-eshopper.png' height='70' width='300'/>",
+        footer:"",
+    }
+
+    $('#printOrder').on('click',function () {
+        $('#print-frame').printThis(option);
+    });
+</script>
 
 <script th:src="@{/vendors/base/vendor.bundle.base.js}"></script>
-<!-- Plugin js for this page-->
-<!-- End plugin js for this page-->
+
 <!-- inject:js -->
+<script th:src="@{/js/printThis.js}"></script>
 <script th:src="@{/js/admin-js/off-canvas.js}"></script>
 <script th:src="@{/js/admin-js/hoverable-collapse.js}"></script>
 <script th:src="@{/js/admin-js/template.js}"></script>
 <script th:src="@{/js/admin-js/todolist.js}"></script>
-<script th:src="@{/js/admin-js/order-detail.js}"></script>
 
 <!-- Custom js for this page-->
 <script th:src="@{/js/admin-js/dashboard.js}"></script>

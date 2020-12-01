@@ -9,12 +9,10 @@ $(document).ready(function () {
         height: 200
     } );
 
-
     CKEDITOR.replace( 'editorTitle', {
         filebrowserUploadUrl: '/api/upload/upload-image',
         height: 200
     } );
-
 
     CKEDITOR.on('dialogDefinition', function (e) {
         let dialogName = e.data.name;
@@ -34,6 +32,8 @@ $(document).ready(function () {
         let dataBlog={};
 
         dataBlog.content=CKEDITOR.instances.editor.getData();
+
+
 
         axios.post("/api/blog/create",dataBlog).then(function (res) {
             if(res.data.success){
@@ -67,10 +67,4 @@ $(document).ready(function () {
         $("cke_dialog").hide();
         CKEDITOR.instances.editor.setData('Hello ...');
     });
-
-    $('#btn_cancel').click(function () {
-        $("cke_dialog").hide();
-        CKEDITOR.instances.editor.setData('Hello ...');
-    });
-
 });

@@ -34,6 +34,7 @@ public class MySQLUserDetailsService implements UserDetailsService {
                 isActive = false;
             }
 
+
             // roles set
             Set<GrantedAuthority> setAuths = new HashSet<>();
             for (Role role : listActiveRoles) {

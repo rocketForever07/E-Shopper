@@ -60,7 +60,6 @@ $(document).ready(function () {
     }
 
 
-
     $('.printOrder').click(function () {
         $('table').printThis({
 

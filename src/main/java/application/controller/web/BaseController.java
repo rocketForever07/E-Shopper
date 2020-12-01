@@ -21,13 +21,13 @@ import java.util.UUID;
 
 public class BaseController {
 
-
     @Autowired
     private CartService cartService;
 
     @Autowired
     private UserService userService;
 
+    
     public LayoutHeaderVM getLayoutHeaderVM() {
         LayoutHeaderVM vm = new LayoutHeaderVM();
         ArrayList<HeaderMenuVM> headerMenuVMArrayList = new ArrayList<>();

@@ -52,7 +52,7 @@ public class AdminController extends BaseController{
 
         model.addAttribute("vm",vm);
 
-        return "/admin/home";
+        return "redirect:admin/product";
     }
 
     @GetMapping("/product")

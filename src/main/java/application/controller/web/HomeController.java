@@ -49,21 +49,62 @@ public class HomeController extends BaseController {
                        final Principal principal) {
 
 
+
         this.checkCookie(response,request,principal);
         HomeLandingVM vm = new HomeLandingVM();
 
         /**
          * set list bannerVM
          */
-
         List<BannerVM> listBanners = new ArrayList<>();
         listBanners.add(new BannerVM("", "Text 1","https://forums.oscommerce.com/uploads/monthly_04_2016/post-336856-0-18918000-1459704022.jpg"));
         listBanners.add(new BannerVM("", "Text 2","https://media.doisongvietnam.vn/u/rootimage/editor/2020/01/23/20/33/w825/e11579764812_3938.jpg"));
+
 
         /**
          * set list categoryVM
          */
         List<CategoryVM> categoryVMList=categoryService.getListCategories();
+//        for(Category category : categoryList) {
+//            CategoryVM categoryVM = new CategoryVM();
+//            categoryVM.setId(category.getId());
+//            categoryVM.setName(category.getName());
+//            categoryVMList.add(categoryVM);
+//        }
+
+        /*
+        * set list product
+        * */
+
+        List<ProductVM> listNewProduct=new ArrayList<>();
+
+        List<ProductVM> listMostPopular =new ArrayList<>();
+
+
+
+
+
+        for(Product product : productService.getListNewProduct()) {
+            ProductVM productVM = new ProductVM();
+            productVM.setId(product.getId());
+            productVM.setName(product.getName());
+            productVM.setMainImage(product.getMainImage());
+            productVM.setPrice(product.getPrice());
+            productVM.setShortDesc(product.getShortDesc());
+
+            listNewProduct.add(productVM);
+        }
+
+        for(Product product : productService.getListProductMostPopular()) {
+            ProductVM productVM = new ProductVM();
+            productVM.setId(product.getId());
+            productVM.setName(product.getName());
+            productVM.setMainImage(product.getMainImage());
+            productVM.setPrice(product.getPrice());
+            productVM.setShortDesc(product.getShortDesc());
+
+            listMostPopular.add(productVM);
+        }
 
         Sort sortable = new Sort(Sort.Direction.ASC,"id");
         if(sort != null) {
@@ -105,6 +146,8 @@ public class HomeController extends BaseController {
         vm.setListBanners(listBanners);
         vm.setCategoryVMList(categoryVMList);
         vm.setProductVMList(productVMList);
+        vm.setListPopularProducts(listMostPopular);
+        vm.setListNewProducts(listNewProduct);
 
         if(productVMList.size() == 0){
             vm.setKeyword("Not found any product");
@@ -123,7 +166,7 @@ public class HomeController extends BaseController {
 
 
         this.checkCookie(response,request,principal);
-        ShopLandingVM vm = new ShopLandingVM();
+        HomeLandingVM vm = new HomeLandingVM();
 
         /**
          * set list bannerVM
@@ -136,13 +179,21 @@ public class HomeController extends BaseController {
         /**
          * set list categoryVM
          */
+        List<CategoryVM> categoryVMList=categoryService.getListCategories();
+//        for(Category category : categoryList) {
+//            CategoryVM categoryVM = new CategoryVM();
+//            categoryVM.setId(category.getId());
+//            categoryVM.setName(category.getName());
+//            categoryVMList.add(categoryVM);
+//        }
+
+        /*
+         * set list product
+         * */
 
         List<ProductVM> listNewProduct=new ArrayList<>();
 
         List<ProductVM> listMostPopular =new ArrayList<>();
-
-
-
 
 
         for(Product product : productService.getListNewProduct()) {
@@ -167,10 +218,31 @@ public class HomeController extends BaseController {
             listMostPopular.add(productVM);
         }
 
+
+
+        List<ProductVM> productVMList = new ArrayList<>();
+
+        for(Product product : productService.getListAllProducts()) {
+            ProductVM productVM = new ProductVM();
+            productVM.setId(product.getId());
+            productVM.setName(product.getName());
+            productVM.setMainImage(product.getMainImage());
+            productVM.setPrice(product.getPrice());
+            productVM.setShortDesc(product.getShortDesc());
+
+            productVMList.add(productVM);
+        }
+
         vm.setLayoutHeaderVM(this.getLayoutHeaderVM());
         vm.setListBanners(listBanners);
+        vm.setCategoryVMList(categoryVMList);
+        vm.setProductVMList(productVMList);
         vm.setListNewProducts(listNewProduct);
         vm.setListPopularProducts(listMostPopular);
+
+        if(productVMList.size() == 0){
+            vm.setKeyword("Not found any product");
+        }
 
         model.addAttribute("vm",vm);
         return "shop";

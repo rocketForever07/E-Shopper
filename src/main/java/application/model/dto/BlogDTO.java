@@ -3,11 +3,22 @@ package application.model.dto;
 import java.util.Date;
 
 public class BlogDTO {
+
     private int id;
     private String title;
+    private String mainImage;
     private String content;
     private String shortDesc;
     private Date createdDate;
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
 
     public int getId() {
         return id;

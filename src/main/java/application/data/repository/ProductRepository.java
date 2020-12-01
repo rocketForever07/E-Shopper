@@ -24,18 +24,32 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
                                                                   @Param("categoryId") Integer categoryId,
                                                                   @Param("productName") String productName);
 
-    @Query("SELECT p FROM dbo_product p "+
-            "ORDER BY p.createdDate DESC ")
+//    @Query("SELECT p FROM dbo_product p "+
+//            "ORDER BY p.createdDate DESC "+"")
+//    List<Product>getListNewProduct();
+
+    @Query(
+            value = "SELECT * FROM dbo_product " +
+                    "ORDER BY created_date DESC " +
+                    "limit 3",
+            nativeQuery = true)
     List<Product>getListNewProduct();
 
+//    @Query("SELECT p FROM dbo_product p "+
+//            "INNER JOIN p.orderProductList op "+
+//            "GROUP BY p.id "+
+//            "ORDER BY COUNT(p.id) desc "
+//            )
+//    List<Product>getListProductMostPopular();
 
-    @Query("SELECT p FROM dbo_product p "+
-            "INNER JOIN p.orderProductList op "+
-            "GROUP BY p.id "+
-            "ORDER BY COUNT(p.id) desc "
-            )
+    @Query(
+            value = "SELECT * FROM dbo_product p " +
+                    "JOIN dbo_order_product op ON p.product_id =  op.product_id " +
+                    "GROUP BY p.product_id "+
+                    "ORDER BY COUNT(p.product_id) desc "+
+                    "limit 3",
+            nativeQuery = true)
     List<Product>getListProductMostPopular();
-
 //    @Query("SELECT new application.model.dto.ProductDTO(p.name, p.shortDesc, c.name) " +
 //            "FROM dbo_product p " +
 //            "INNER JOIN p.category c " +

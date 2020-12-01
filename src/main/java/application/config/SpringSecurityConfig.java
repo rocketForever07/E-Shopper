@@ -1,5 +1,6 @@
 package application.config;
 
+import application.authen.MySQLUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/**").permitAll()
+                .antMatchers("/order/detail**").permitAll()
+                .antMatchers("/order/update**").permitAll()
+                .antMatchers("/api/cart-product/update").permitAll()
+                .antMatchers("/api/cart-product/add").permitAll()
+                .antMatchers("/product/**").permitAll()
+                .antMatchers("/register/**").permitAll()
+                .antMatchers("/link/**").permitAll()
+                .antMatchers("/cart/**").permitAll()
                 .antMatchers("/admin/**").hasAnyRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("USER")
                 .anyRequest().authenticated()
@@ -43,8 +52,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 .failureUrl("/login?fail")//lỗi nhảy vào đây
                 .defaultSuccessUrl("/")//success
-                .permitAll().
-                and().rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret").tokenValiditySeconds(1296000).userDetailsService(userDetailsService)
+                .permitAll()
+//                and().rememberMe().rememberMeParameter("remember-me").key("uniqueAndSecret").tokenValiditySeconds(1296000).userDetailsService(userDetailsService)
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
                 .deleteCookies("guid")
@@ -56,14 +65,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        logger.info("-----configure(WebSecurity web)");
         web.ignoring()
                 .antMatchers("/css/**", "/js/**", "/images/**", "/vendors/**", "/webjars/**");
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        logger.info("-----configureGlobal(AuthenticationManagerBuilder auth)");
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 

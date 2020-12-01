@@ -1,13 +1,6 @@
 $(document).ready(function () {
     let dataOrder={}
 
-
-    console.log($("#exampleModalLong").data("status"));
-
-    $("#exampleModalLong").data("status",2);
-    console.log($("#exampleModalLong").data("status"));
-
-
     $(".edit-order").on("click",function () {
         dataOrder.id=$(this).data("id");
         let link = "/api/order/detail/"+dataOrder.id;
@@ -15,6 +8,9 @@ $(document).ready(function () {
         axios.get(link).then(function (res) {
             if(res){
                 dataOrder.orderStatus=res.data.data.orderStatus;
+
+                console.log(dataOrder);
+                $(".input-order-status").val(dataOrder.orderStatus);
             }
         },function (error) {
 
@@ -28,6 +24,9 @@ $(document).ready(function () {
 
     $(".btn-save-product").on("click",function () {
         let linkPort="/api/order/update";
+
+        dataOrder.orderStatus=$(".input-order-status").val();
+        console.log(dataOrder);
         axios.put(linkPort,dataOrder).then(function (res) {
 
             if(res.data.success){
@@ -54,5 +53,17 @@ $(document).ready(function () {
         });
     })
 
+    let option={
+        importCss:false,
+        b
+
+    }
+
+
+    $('.printOrder').click(function () {
+        $('table').printThis({
+
+        });
+    })
 
 });

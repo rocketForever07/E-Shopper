@@ -10,6 +10,16 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/animate.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/price-range.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+
+    <style>
+        tr td{
+            text-align: center;
+            line-height: 48px;
+        }
+        th{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -40,18 +50,18 @@
                 </thead>
                 <tbody>
                 <tr th:each="order,iter : ${vm.getOrderVMS()}" th:switch="${order.getStatus()}">
-                    <td colspan="1" th:text="${iter.index+1}" ></td>
-                    <td colspan="2" th:text="${order.getCustomerName()}"></td>
-                    <td colspan="2" th:text="${order.getEmail()}"></td>
-                    <td colspan="2" th:text="${order.getAddress()}"></td>
-                    <td colspan="2" th:text="${order.getPhoneNumber()}"></td>
-                    <td colspan="1" th:text="${order.getPrice()}"></td>
-                    <td colspan="1" th:text="${order.getCreatedDate()}"></td>
-                    <td colspan="1" th:case="0">Đang xử lý</td>
-                    <td colspan="1" th:case="1">Đang giao hàng</td>
-                    <td colspan="1" th:case="2">Đã nhận hàng</td>
-                    <td colspan="1" th:case="3">Đã hủy</td>
-                    <td colspan="1">
+                    <td colspan="1" th:text="${iter.index+1}" style="line-height: 48px"></td>
+                    <td colspan="2" th:text="${order.getCustomerName()}"style="line-height: 48px"></td>
+                    <td colspan="2" th:text="${order.getEmail()}"style="line-height: 48px"></td>
+                    <td colspan="2" th:text="${order.getAddress()}"style="line-height: 48px"></td>
+                    <td colspan="2" th:text="${order.getPhoneNumber()}"style="line-height: 48px"></td>
+                    <td colspan="1" th:text="${order.getPrice()}"style="line-height: 48px"></td>
+                    <td colspan="1" th:text="${order.getCreatedDate()}"style="line-height: 48px"></td>
+                    <td colspan="1" th:case="0" style="line-height: 48px">Đang xử lý</td>
+                    <td colspan="1" th:case="1" style="line-height: 48px">Đang giao hàng</td>
+                    <td colspan="1" th:case="2" style="line-height: 48px">Đã nhận hàng</td>
+                    <td colspan="1" th:case="3" style="line-height: 48px">Đã hủy</td>
+                    <td colspan="1" style="box-sizing: border-box; padding-top: 0px;">
                         <a class="btn btn-primary" th:href="@{'/order/history/'+${order.getId()}}" role="button">Detail</a>
                     </td>
 

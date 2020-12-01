@@ -44,7 +44,10 @@ $(document).ready(function() {
 
         let linkPost = "/api/cart-product/add";
 
+        console.log(linkPost);
+        console.log(dataCart);
         axios.post(linkPost, dataCart).then(function(res){
+            console.log(res.data);
             if(res.data.success) {
                 swal(
                     'Success',
